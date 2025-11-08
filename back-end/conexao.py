@@ -14,10 +14,9 @@ def conector():
             port=os.getenv("DB_PORT")
         )
         cursor = conexao.cursor()
-        
+        print("Deu certoooo, eu amo back-end ")
         return conexao, cursor
     except Exception as erro:
         print(f"Error de conexao: {erro}")
         return None , None
     
-conector()
