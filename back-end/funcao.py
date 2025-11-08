@@ -37,4 +37,17 @@ def cadrastar_produtos(nome, categoria, preco, quantidade):
             cursor.close()
             conexao.commit()
 
-
+def listar_produtos():
+    conexao, cursor = conector()
+    if conexao:
+        try:
+            cursor.execute(
+                "SELECT * FROM produtos ORDER BY id"
+                )
+            return cursor.fetchall()
+        except Exception as erro:
+            print(f"Erro ao listar os produtos {erro}")
+            return []
+        finally:
+            cursor.close()
+            conexao.commit()
