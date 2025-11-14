@@ -19,4 +19,4 @@ def conector():
     except Exception as erro:
         print(f"Error de conexao: {erro}")
         return None , None
-    
+   
