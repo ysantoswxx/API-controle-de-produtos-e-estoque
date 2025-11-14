@@ -20,7 +20,7 @@ def criar_tabela():
             cursor.close()
             conexao.commit()
  
-def cadrastar_produtos(nome, categoria, preco, quantidade):
+def cadastar_produtos(nome, categoria, preco, quantidade):
     conexao, cursor = conector()
     if conexao:
         try:

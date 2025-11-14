@@ -11,12 +11,12 @@ def home():
 
 # -------------------- CADASTRAR PRODUTO --------------------
 @app.post("/produtos")
-def criar_protudo(nome: str,categoria:str, preco:float, quantidade:int):
-    funcao.cadrastar_produtos(nome, categoria, preco, quantidade)
+def criar_produtos(nome: str,categoria:str, preco:float, quantidade:int):
+    funcao.cadastar_produtos(nome, categoria, preco, quantidade)
     return{"Mensagem": "Produto cadastrado com sucesso!"}
 
 # -------------------- LISTAR PRODUTOS ----------------------
-@app.post("/produtos")
+@app.get("/produtos")
 def listar_produtos():
     produtos = funcao.listar_produtos()
     listar = []
@@ -40,5 +40,17 @@ def atualizar_produto(id: int, novo_preco: float, nova_quantidade: int):
     if produto:
         funcao.atualizar_produto(id, novo_preco, nova_quantidade)
         return {"mensagem": "Produto atualizado com sucesso!"}
+    else:
+        return {"erro": "Produto não encontrado"}
+
+
+# -------------------- DELETAR PRODUTO ----------------------        
+@app.delete("/produtos/{id_produto}")
+def deletar_produto(id: int):
+    produto = funcao.buscar_produto(id)
+
+    if produto:
+        funcao.deletar_produto(id)
+        return {"mensagem": "Produto excluído com sucesso!"}
     else:
         return {"erro": "Produto não encontrado"}
