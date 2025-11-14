@@ -33,7 +33,7 @@ def listar_produtos():
     return{"produtos": listar}
 
 # -------------------- ATUALIZAR PRODUTO --------------------
-@app.put("/produtos/{id_produto}")
+@app.put("/produtos/{id}")
 def atualizar_produto(id: int, novo_preco: float, nova_quantidade: int):
     produto = funcao.buscar_produto(id)
 
@@ -45,7 +45,7 @@ def atualizar_produto(id: int, novo_preco: float, nova_quantidade: int):
 
 
 # -------------------- DELETAR PRODUTO ----------------------        
-@app.delete("/produtos/{id_produto}")
+@app.delete("/produtos/{id}")
 def deletar_produto(id: int):
     produto = funcao.buscar_produto(id)
 

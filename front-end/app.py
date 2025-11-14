@@ -11,7 +11,7 @@ st.set_page_config (page_title= "Controle de Estoque", layout="wide", page_icon=
 st.title("📦 Sistema de Controle de Produtos ")
 
 menu = st.sidebar.radio("Menu",
-[ "Listar Produtos","Adicionar Produtos", "Atualizar Peço", "Deletar podutos"])
+[ "Listar Produtos","Adicionar Produtos", "Atualizar Produtos", "Deletar podutos"])
 
 if menu == "Listar Produtos":
     st.subheader("📦 Todos os Produtos")
@@ -60,4 +60,26 @@ elif menu == "Adicionar Produtos":
     else:
         st.warning("Preencha todos os campos obrigatórios!") 
 
-        
+elif menu == "Atualizar Produtos":
+    st.subheader("✏ Atualizar Produtos")
+
+    id_produtos = st.number_input("ID do Produto", min_value=1, step=1)
+    novo_preco = st.number_input("Novo preço", min_value=0.0, format="%.2f")
+    nova_quantidade = st.number_input("Nova Quantidade", min_value=0, step=1)
+
+    if st.button("Atualizar"):
+        params = {
+            "novo_preco": novo_preco,
+            "nova_quantidade": nova_quantidade
+    }
+        response = requests.put(f"{API_URL}/produtos/ {id}",params=params)
+
+        if response.status_code == 200:
+            msg = response.json()
+            st.success(msg.get("Mensagem", "Produtos atualizado!"))
+        else: 
+            st.error("Erro ao atualizar o produto")
+
+
+
+
