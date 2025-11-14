@@ -11,7 +11,7 @@ st.set_page_config (page_title= "Controle de Estoque", layout="wide", page_icon=
 st.title("📦 Sistema de Controle de Produtos ")
 
 menu = st.sidebar.radio("Menu",
-[ "Listar Produtos","Adicionar Produtos", "Atualizar Produtos", "Deletar podutos"])
+[ "Listar Produtos","Adicionar Produtos", "Atualizar Produtos", "Deletar Podutos"])
 
 if menu == "Listar Produtos":
     st.subheader("📦 Todos os Produtos")
@@ -81,5 +81,20 @@ elif menu == "Atualizar Produtos":
             st.error("Erro ao atualizar o produto")
 
 
+elif menu == "Deletar Podutos":
+    st.subheader("🗑 Deletar Produtos")
 
+    id_produtos = st.number_input("ID do produto", min_value=1, step=1)
+
+    if st.button("Deletar"):
+        response = requests.delete(f"{API_URL}/podutos/{id_produtos}")
+
+        if response .status_code == 200:
+            msg = response.json()
+            if "erro" in msg:
+                st.warning(msg["erro"])
+            else:
+                st.success(msg["mensagem"])
+        else:
+            st.error("Erro ao deletar produto.")
 
